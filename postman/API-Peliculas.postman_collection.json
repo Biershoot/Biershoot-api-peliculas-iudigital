@@ -1,1260 +1,725 @@
 {
-  "info": {
-    "name": "API Películas IU Digital",
-    "description": "Colección para probar la API REST de los módulos Género, Director, Productora, Tipo y Media.\n\nEjecutar las carpetas en orden (1 → 6). Las peticiones \"Crear\" guardan el _id en las variables de la colección (generoId, directorId, productoraId, tipoId, mediaId) para usarlo en las siguientes peticiones.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:4000"
+    "info": {
+        "name": "API Peliculas IU Digital",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    {
-      "key": "generoId",
-      "value": ""
-    },
-    {
-      "key": "generoInactivoId",
-      "value": ""
-    },
-    {
-      "key": "directorId",
-      "value": ""
-    },
-    {
-      "key": "productoraId",
-      "value": ""
-    },
-    {
-      "key": "tipoId",
-      "value": ""
-    },
-    {
-      "key": "mediaId",
-      "value": ""
-    }
-  ],
-  "item": [
-    {
-      "name": "1. Género",
-      "item": [
+    "variable": [
         {
-          "name": "Crear género",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Ciencia ficción\",\n  \"estado\": \"Activo\",\n  \"descripcion\": \"Historias basadas en avances científicos o tecnológicos\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"generoId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
+            "key": "url",
+            "value": "http://localhost:4000"
         },
         {
-          "name": "Listar generos",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
+            "key": "generoId",
+            "value": ""
         },
         {
-          "name": "Obtener género por id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos/{{generoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos",
-                "{{generoId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
+            "key": "directorId",
+            "value": ""
         },
         {
-          "name": "Actualizar género",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos/{{generoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos",
-                "{{generoId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"descripcion\": \"Historias futuristas basadas en la ciencia y la tecnología\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
+            "key": "productoraId",
+            "value": ""
         },
         {
-          "name": "Listar géneros activos",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos?estado=Activo",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos"
-              ],
-              "query": [
+            "key": "tipoId",
+            "value": ""
+        },
+        {
+            "key": "mediaId",
+            "value": ""
+        }
+    ],
+    "item": [
+        {
+            "name": "Genero",
+            "item": [
                 {
-                  "key": "estado",
-                  "value": "Activo"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Crear género inactivo",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Musical\",\n  \"estado\": \"Inactivo\",\n  \"descripcion\": \"Historias contadas con música\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"generoInactivoId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Error: género sin nombre",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"descripcion\": \"Sin nombre\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 400 Bad Request\", () => pm.response.to.have.status(400));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "2. Director",
-      "item": [
-        {
-          "name": "Crear director",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/directores",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "directores"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombres\": \"Christopher Nolan\",\n  \"estado\": \"Activo\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"directorId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Listar directores",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/directores",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "directores"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Obtener director por id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/directores/{{directorId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "directores",
-                "{{directorId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Actualizar director",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/directores/{{directorId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "directores",
-                "{{directorId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombres\": \"Christopher Edward Nolan\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "3. Productora",
-      "item": [
-        {
-          "name": "Crear productora",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/productoras",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "productoras"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Warner Bros\",\n  \"estado\": \"Activo\",\n  \"slogan\": \"The stuff that dreams are made of\",\n  \"descripcion\": \"Estudio de cine y televisión estadounidense\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"productoraId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Listar productoras",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/productoras",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "productoras"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Obtener productora por id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/productoras/{{productoraId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "productoras",
-                "{{productoraId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Actualizar productora",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/productoras/{{productoraId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "productoras",
-                "{{productoraId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"descripcion\": \"Uno de los estudios de cine más grandes de Hollywood\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "4. Tipo",
-      "item": [
-        {
-          "name": "Crear tipo",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/tipos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "tipos"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Película\",\n  \"descripcion\": \"Producción audiovisual de una sola parte\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"tipoId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Listar tipos",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/tipos",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "tipos"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Obtener tipo por id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/tipos/{{tipoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "tipos",
-                "{{tipoId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Actualizar tipo",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/tipos/{{tipoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "tipos",
-                "{{tipoId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"descripcion\": \"Producción audiovisual de larga duración y una sola parte\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "5. Media (Películas y series)",
-      "item": [
-        {
-          "name": "Crear media",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"serial\": \"IUD-0001\",\n  \"titulo\": \"Interstellar\",\n  \"sinopsis\": \"Un grupo de exploradores viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad.\",\n  \"url\": \"https://peliculas.iudigital.edu.co/interstellar\",\n  \"imagenPortada\": \"https://image.tmdb.org/t/p/w500/interstellar.jpg\",\n  \"anioEstreno\": 2014,\n  \"genero\": \"{{generoId}}\",\n  \"director\": \"{{directorId}}\",\n  \"productora\": \"{{productoraId}}\",\n  \"tipo\": \"{{tipoId}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                  "pm.collectionVariables.set(\"mediaId\", pm.response.json()._id);"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Listar medias",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Obtener media por id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias/{{mediaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias",
-                "{{mediaId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Actualizar media",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias/{{mediaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias",
-                "{{mediaId}}"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"titulo\": \"Interstellar (Versión extendida)\",\n  \"anioEstreno\": 2014\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Buscar medias por título",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias?titulo=inter",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ],
-              "query": [
+                    "name": "Crear genero",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/genero",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Ciencia ficción\",\n    \"estado\": \"Activo\",\n    \"descripcion\": \"Películas basadas en avances científicos y tecnológicos\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.collectionVariables.set(\"generoId\", pm.response.json()._id);"
+                                ]
+                            }
+                        }
+                    ]
+                },
                 {
-                  "key": "titulo",
-                  "value": "inter"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Filtrar medias por género",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias?genero={{generoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ],
-              "query": [
+                    "name": "Listar genero",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/genero",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero"
+                            ]
+                        }
+                    }
+                },
                 {
-                  "key": "genero",
-                  "value": "{{generoId}}"
+                    "name": "Listar genero activos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/genero/activos",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero",
+                                "activos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Consultar genero por id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/genero/{{generoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero",
+                                "{{generoId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar genero",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/genero/{{generoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero",
+                                "{{generoId}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Ciencia ficción\",\n    \"estado\": \"Activo\",\n    \"descripcion\": \"Películas futuristas basadas en la ciencia\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
                 }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
+            ]
         },
         {
-          "name": "Error: serial duplicado",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"serial\": \"IUD-0001\",\n  \"titulo\": \"Duplicada\",\n  \"url\": \"https://peliculas.iudigital.edu.co/otra\",\n  \"anioEstreno\": 2014,\n  \"genero\": \"{{generoId}}\",\n  \"director\": \"{{directorId}}\",\n  \"productora\": \"{{productoraId}}\",\n  \"tipo\": \"{{tipoId}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            "name": "Director",
+            "item": [
+                {
+                    "name": "Crear director",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/director",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombres\": \"Christopher Nolan\",\n    \"estado\": \"Activo\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.collectionVariables.set(\"directorId\", pm.response.json()._id);"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar director",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/director",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Listar director activos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/director/activos",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director",
+                                "activos"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Consultar director por id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/director/{{directorId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director",
+                                "{{directorId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar director",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/director/{{directorId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director",
+                                "{{directorId}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombres\": \"Christopher Edward Nolan\",\n    \"estado\": \"Activo\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
                 }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 409 Conflict\", () => pm.response.to.have.status(409));"
-                ]
-              }
-            }
-          ]
+            ]
         },
         {
-          "name": "Error: género inactivo",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias"
-              ]
-            },
-            "description": "Solo se pueden asignar géneros, directores y productoras en estado Activo.",
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"serial\": \"IUD-0002\",\n  \"titulo\": \"La La Land\",\n  \"url\": \"https://peliculas.iudigital.edu.co/la-la-land\",\n  \"anioEstreno\": 2016,\n  \"genero\": \"{{generoInactivoId}}\",\n  \"director\": \"{{directorId}}\",\n  \"productora\": \"{{productoraId}}\",\n  \"tipo\": \"{{tipoId}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+            "name": "Productora",
+            "item": [
+                {
+                    "name": "Crear productora",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/productora",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Warner Bros\",\n    \"estado\": \"Activo\",\n    \"slogan\": \"The stuff that dreams are made of\",\n    \"descripcion\": \"Estudio de cine estadounidense\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.collectionVariables.set(\"productoraId\", pm.response.json()._id);"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar productora",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/productora",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Listar productora activas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/productora/activas",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora",
+                                "activas"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Consultar productora por id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/productora/{{productoraId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora",
+                                "{{productoraId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar productora",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/productora/{{productoraId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora",
+                                "{{productoraId}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Warner Bros\",\n    \"estado\": \"Activo\",\n    \"slogan\": \"The stuff that dreams are made of\",\n    \"descripcion\": \"Uno de los estudios más grandes de Hollywood\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
                 }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 400 Bad Request\", () => pm.response.to.have.status(400));"
-                ]
-              }
-            }
-          ]
+            ]
+        },
+        {
+            "name": "Tipo",
+            "item": [
+                {
+                    "name": "Crear tipo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/tipo",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "tipo"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Película\",\n    \"descripcion\": \"Producción de una sola parte\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.collectionVariables.set(\"tipoId\", pm.response.json()._id);"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar tipo",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/tipo",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "tipo"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Consultar tipo por id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/tipo/{{tipoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "tipo",
+                                "{{tipoId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar tipo",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/tipo/{{tipoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "tipo",
+                                "{{tipoId}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Película\",\n    \"descripcion\": \"Producción audiovisual de larga duración\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Media",
+            "item": [
+                {
+                    "name": "Crear media",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/media",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "media"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"serial\": \"IUD-001\",\n    \"titulo\": \"Interstellar\",\n    \"sinopsis\": \"Un grupo de exploradores viaja a través de un agujero de gusano para buscar un nuevo hogar para la humanidad.\",\n    \"url\": \"https://peliculas.iudigital.edu.co/interstellar\",\n    \"imagen\": \"https://image.tmdb.org/t/p/w500/interstellar.jpg\",\n    \"anioEstreno\": 2014,\n    \"genero\": \"{{generoId}}\",\n    \"director\": \"{{directorId}}\",\n    \"productora\": \"{{productoraId}}\",\n    \"tipo\": \"{{tipoId}}\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "pm.collectionVariables.set(\"mediaId\", pm.response.json()._id);"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar media",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/media",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "media"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Consultar media por id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/media/{{mediaId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "media",
+                                "{{mediaId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Actualizar media",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/media/{{mediaId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "media",
+                                "{{mediaId}}"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"serial\": \"IUD-001\",\n    \"titulo\": \"Interstellar (Versión extendida)\",\n    \"sinopsis\": \"Un grupo de exploradores viaja a través de un agujero de gusano para buscar un nuevo hogar para la humanidad.\",\n    \"url\": \"https://peliculas.iudigital.edu.co/interstellar\",\n    \"imagen\": \"https://image.tmdb.org/t/p/w500/interstellar.jpg\",\n    \"anioEstreno\": 2014,\n    \"genero\": \"{{generoId}}\",\n    \"director\": \"{{directorId}}\",\n    \"productora\": \"{{productoraId}}\",\n    \"tipo\": \"{{tipoId}}\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Eliminar",
+            "item": [
+                {
+                    "name": "Eliminar media",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/media/{{mediaId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "media",
+                                "{{mediaId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar genero",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/genero/{{generoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "genero",
+                                "{{generoId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar director",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/director/{{directorId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "director",
+                                "{{directorId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar productora",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/productora/{{productoraId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "productora",
+                                "{{productoraId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar tipo",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{url}}/tipo/{{tipoId}}",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "tipo",
+                                "{{tipoId}}"
+                            ]
+                        }
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "6. Eliminar",
-      "item": [
-        {
-          "name": "Error: eliminar género en uso",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos/{{generoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos",
-                "{{generoId}}"
-              ]
-            },
-            "description": "No se permite eliminar un género asociado a una media."
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 409 Conflict\", () => pm.response.to.have.status(409));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar media",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/medias/{{mediaId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "medias",
-                "{{mediaId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar género",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos/{{generoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos",
-                "{{generoId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar género inactivo",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/generos/{{generoInactivoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "generos",
-                "{{generoInactivoId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar director",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/directores/{{directorId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "directores",
-                "{{directorId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar productora",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/productoras/{{productoraId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "productoras",
-                "{{productoraId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "name": "Eliminar tipo",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/tipos/{{tipoId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "tipos",
-                "{{tipoId}}"
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));"
-                ]
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
+    ]
 }
