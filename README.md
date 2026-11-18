@@ -104,7 +104,7 @@ En la carpeta `postman` está la colección con todas las peticiones. Se importa
 
 La API está desplegada en **Render** como Web Service y la base de datos en **MongoDB Atlas**.
 
-- URL de la API: `https://api-peliculas-iudigital.onrender.com` (cambiar por la URL real que entrega Render)
+- URL de la API: https://api-peliculas-iudigital-tab0.onrender.com
 - Build command: `npm install`
 - Start command: `npm start`
 - Variable de entorno: `MONGO_URI` (cadena de conexión de Atlas). Render asigna el `PORT` solo.
