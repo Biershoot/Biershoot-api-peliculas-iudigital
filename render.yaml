@@ -1,0 +1,11 @@
+# configuración para desplegar la API en Render
+services:
+  - type: web
+    name: api-peliculas-iudigital
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false

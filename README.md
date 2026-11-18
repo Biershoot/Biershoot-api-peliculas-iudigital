@@ -99,3 +99,15 @@ Ejemplo para crear una media:
 ## Postman
 
 En la carpeta `postman` está la colección con todas las peticiones. Se importa en Postman y se ejecuta en orden: Genero, Director, Productora, Tipo, Media y Eliminar.
+
+## Despliegue (EA3)
+
+La API está desplegada en **Render** como Web Service y la base de datos en **MongoDB Atlas**.
+
+- URL de la API: `https://api-peliculas-iudigital.onrender.com` (cambiar por la URL real que entrega Render)
+- Build command: `npm install`
+- Start command: `npm start`
+- Variable de entorno: `MONGO_URI` (cadena de conexión de Atlas). Render asigna el `PORT` solo.
+- En Atlas, en *Network Access*, se agregó `0.0.0.0/0` para que Render se pueda conectar.
+
+La ruta `GET /` responde un mensaje para comprobar que la API está funcionando. También está el archivo `render.yaml` con esta configuración.

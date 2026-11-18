@@ -13,6 +13,11 @@ getConnection();
 // para que el servidor entienda los json que llegan en el body
 app.use(express.json());
 
+// ruta principal para comprobar que la API está arriba en la nube
+app.get('/', (req, res) => {
+    res.json({ mensaje: 'API Películas IU Digital funcionando' });
+});
+
 app.use('/genero', require('./routes/genero'));
 app.use('/director', require('./routes/director'));
 app.use('/productora', require('./routes/productora'));
